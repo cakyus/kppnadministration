@@ -1,3 +1,7 @@
 <?php
-						$host = 'localhost:3306';
-						?>
+
+/**
+ * @depreciated see config.php
+ **/
+
+$host = 'localhost:3306';

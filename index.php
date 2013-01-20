@@ -1,6 +1,11 @@
-<!DOCTYPE HTML>
+<?php
+
+include_once('config/config.php');
+
+?><!DOCTYPE HTML>
 <html>
   <head>
+  <title><?php echo $config['application.title']; ?></title>
   <link rel="stylesheet" type="text/css" href="templates/loginstyle.css">
     <script type="text/javascript" src="jquery.tools.min.js"></script>
 
@@ -32,14 +37,8 @@
     <body>
 			<div id="title">
 				<div id="logo"></div>
-				<div id="title_apps">Aplikasi Administrasi dan Monitoring KPPN</div>
-				<?php
-					include_once("config/koneksi.php");
-					$query 	= "SELECT versi from versi";
-					$qVersi	= mysql_query($query);
-					$rVersi	= mysql_fetch_object($qVersi);
-				?>
-				<div id="title_appsversion">Versi <?php echo $rVersi->versi; ?></div>
+				<div id="title_apps"><?php echo $config['application.title']; ?></div>
+				<div id="title_appsversion">Versi <?php echo $config['application.version']; ?></div>
 			</div>
 			<div id="header">
 			  
@@ -52,15 +51,6 @@
 					 <input type="submit" value="LOGIN" /><br />
 				  </form>
 			</div>
-			<div id="footer">
-				Copyleft 
-				<span style="transform:rotate(180deg);
-						-webkit-transform:rotate(180deg);
-						-moz-transform:rotate(180deg);
-						-o-transform:rotate(180deg);
-						filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2); 
-						display: inline-block;">&copy;
-				</span> 2012 Direktorat Sistem Perbendaharaan. All wrongs reserved.
-			</div>
+			<div id="footer"><?php echo $config['application.copyright']; ?></div>
   </body>
 </html>

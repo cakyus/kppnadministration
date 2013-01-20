@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @depreciated see config.php
+ **/
+
 include "ip.php";
 $database = "sqldb13";
 $link = mysql_connect($host,'root','M3t@m0rph');
@@ -9,4 +13,4 @@ $link = mysql_connect($host,'root','M3t@m0rph');
 
 // Koneksi dan memilih database di server
 mysql_select_db($database) or die("Database tidak bisa dibuka");
-?>
+
