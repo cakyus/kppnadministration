@@ -45,7 +45,7 @@ class Database {
 			return false;
 		}
 		
-		return new \Lighter\Database\Recordset($this->connection, $result);
+		return new \Lighter\Database\Recordset($this, $result);
 	}
 	
 	/**

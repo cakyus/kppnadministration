@@ -4,18 +4,23 @@ namespace Lighter\Database;
 
 class Record {
 	
-	private $connection;
-	private $result;
+	private $database;
+	private $recordset;
 	private $properties;
 	
 	public function __construct(
-		  $connection=null
-		, $result=null
-		, $properties=null
+		  \Lighter\Database $database = null
+		, \Lighter\Database\Recordset $recordset = null
+		, $properties = null
 		) {
+			
+		if (is_null($database)) {
+			$this->database = new \Lighter\Database;
+		} else {
+			$this->database = $database;
+		}
 		
-		$this->connection = $connection;
-		$this->result = $result;
+		$this->recordset = $recordset;
 		
 		if (is_null($properties)) {
 			$this->properties = array();
@@ -56,5 +61,16 @@ class Record {
 	
 	public function __set($name, $value) {
 		
+		$method = 'set'.ucfirst($name);
+		if (method_exists($this, $method)) {
+			return call_user_func(array($this, $method), $value);
+		}
+		
+		if (isset($this->properties[$name])) {
+			$this->properties[$name] = $value;
+			return true;
+		}
+		
+		throw new \Exception("Undefined property. '$name'");
 	}
 }

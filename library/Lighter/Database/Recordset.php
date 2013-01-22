@@ -4,11 +4,20 @@ namespace Lighter\Database;
 
 class Recordset {
 	
-	private $connection;
+	private $database;
 	private $result;
 	
-	public function __construct($connection=null, $result=null) {
-		$this->connection = $connection;
+	public function __construct(
+		  \Lighter\Database $database = null
+		, $result = null
+		) {
+		
+		if (is_null($database)) {
+			$this->database = new \Lighter\Database;
+		} else {
+			$this->database = $database;
+		}
+		
 		$this->result = $result;
 	}
 	
@@ -25,8 +34,8 @@ class Recordset {
 		}
 		
 		return new \Lighter\Database\Record(
-			  $this->connection
-			, $this->result
+			  $this->database
+			, $this
 			, $properties
 			);
 	}
